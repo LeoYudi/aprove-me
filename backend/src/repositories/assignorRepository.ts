@@ -5,7 +5,7 @@ export type CreateAssignorArgsType = {
   name: string;
 };
 
-export type CreateAssignorType = {
+export type AssignorType = {
   id: string;
   document: string;
   email: string;
@@ -14,10 +14,14 @@ export type CreateAssignorType = {
 };
 
 export abstract class AssignorRepository {
+  abstract findOne(id: string): Promise<AssignorType>;
+
   abstract create({
     document,
     email,
     phone,
     name,
-  }: CreateAssignorArgsType): Promise<CreateAssignorType>;
+  }: CreateAssignorArgsType): Promise<AssignorType>;
+
+  abstract delete(id: string): Promise<AssignorType>;
 }
