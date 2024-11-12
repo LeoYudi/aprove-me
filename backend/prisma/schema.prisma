@@ -14,14 +14,14 @@ model Payable {
   id           String   @id @default(uuid())
   value        Float
   emissionDate DateTime
-  assignorId   Int
+  assignorId   String
   assignor     Assignor @relation(fields: [assignorId], references: [id])
 
   @@map("payables")
 }
 
 model Assignor {
-  id       Int       @id @default(autoincrement())
+  id       String    @id @default(uuid())
   document String
   email    String
   phone    String
