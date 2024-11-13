@@ -3,6 +3,7 @@ import {
   AssignorRepository,
   CreateAssignorArgsType,
   AssignorType,
+  UpdateAssignorArgsType,
 } from '../assignorRepository';
 import { Injectable } from '@nestjs/common';
 
@@ -34,5 +35,20 @@ export class PrismaAssignorRepository implements AssignorRepository {
 
   async delete(id: string): Promise<AssignorType> {
     return await this.prisma.assignor.delete({ where: { id } });
+  }
+
+  async update(
+    id: string,
+    { document, email, phone, name }: UpdateAssignorArgsType,
+  ): Promise<AssignorType> {
+    return await this.prisma.assignor.update({
+      where: { id },
+      data: {
+        document,
+        email,
+        phone,
+        name,
+      },
+    });
   }
 }
