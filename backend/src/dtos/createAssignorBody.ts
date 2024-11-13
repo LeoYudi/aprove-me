@@ -5,7 +5,7 @@ export class CreateAssignorBody {
     message: 'O campo `document` não pode ser vazio',
   })
   @MaxLength(30, {
-    message: 'O campo `document` deve ser menor que 30 caracteres',
+    message: 'Field `document` must be shorter than 30 characters',
   })
   document: string;
 
@@ -13,10 +13,10 @@ export class CreateAssignorBody {
     message: 'O campo `email` não pode ser vazio',
   })
   @MaxLength(140, {
-    message: 'O campo `email` deve ser menor que 140 caracteres',
+    message: 'Field `email` must be shorter than 140 characters',
   })
   @IsEmail(undefined, {
-    message: 'O campo `email` é inválido',
+    message: 'Field `email` is invalid',
   })
   email: string;
 
@@ -24,7 +24,7 @@ export class CreateAssignorBody {
     message: 'O campo `phone` não pode ser vazio',
   })
   @MaxLength(20, {
-    message: 'O campo `phone` deve ser menor que 20 caracteres',
+    message: 'Field `phone` must be shorter than 20 characters',
   })
   phone: string;
 
@@ -32,7 +32,7 @@ export class CreateAssignorBody {
     message: 'O campo `name` não pode ser vazio',
   })
   @MaxLength(140, {
-    message: 'O campo `name` deve ser menor que 140 caracteres',
+    message: 'Field `name` must be shorter than 140 characters',
   })
   name: string;
 }

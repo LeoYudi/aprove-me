@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   NotFoundException,
   Param,
   Patch,
@@ -14,6 +15,16 @@ import { UpdateAssignorData } from 'src/dtos/updateAssignorBody';
 @Controller('assignor')
 export class AssignorController {
   constructor(private assignorService: AssignorService) {}
+
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    const assignor = await this.assignorService.findOne(id);
+
+    if (!assignor)
+      throw new NotFoundException(`Assignor with id '${id}' not found`);
+
+    return assignor;
+  }
 
   @Post('create')
   async create(@Body() body: CreateAssignorBody) {
