@@ -16,5 +16,6 @@ import { AssignorService } from './assignor.service';
       useClass: PrismaAssignorRepository,
     },
   ],
+  exports: [AssignorService],
 })
 export class AssignorModule {}

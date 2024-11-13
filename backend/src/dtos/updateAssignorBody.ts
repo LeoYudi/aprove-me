@@ -1,6 +1,6 @@
 import { IsEmail, IsOptional, MaxLength } from 'class-validator';
 
-export class UpdateAssignorData {
+export class UpdateAssignorBody {
   @IsOptional()
   @MaxLength(30, {
     message: 'Field `document` must be shorter than 30 characters',

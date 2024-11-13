@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAssignorBody } from 'src/dtos/createAssignorBody';
-import { UpdateAssignorData } from 'src/dtos/updateAssignorBody';
+import { UpdateAssignorBody } from 'src/dtos/updateAssignorBody';
 import { AssignorRepository } from 'src/repositories/assignorRepository';
 
 @Injectable()
@@ -23,7 +23,7 @@ export class AssignorService {
     return assignor;
   }
 
-  async update(id: string, updateAssignorData: UpdateAssignorData) {
+  async update(id: string, updateAssignorData: UpdateAssignorBody) {
     let assignor = await this.findOne(id);
 
     if (assignor)

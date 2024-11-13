@@ -10,7 +10,7 @@ import {
 } from '@nestjs/common';
 import { CreateAssignorBody } from 'src/dtos/createAssignorBody';
 import { AssignorService } from './assignor.service';
-import { UpdateAssignorData } from 'src/dtos/updateAssignorBody';
+import { UpdateAssignorBody } from 'src/dtos/updateAssignorBody';
 
 @Controller('assignor')
 export class AssignorController {
@@ -47,16 +47,16 @@ export class AssignorController {
     if (!deletedAssignor)
       throw new NotFoundException(`Assignor with id '${id}' not found`);
 
-    return deletedAssignor;
+    return { assignor: deletedAssignor };
   }
 
   @Patch('update/:id')
-  async update(@Param('id') id: string, @Body() body: UpdateAssignorData) {
+  async update(@Param('id') id: string, @Body() body: UpdateAssignorBody) {
     const updatedAssignor = await this.assignorService.update(id, body);
 
     if (!updatedAssignor)
       throw new NotFoundException(`Assignor with id '${id}' not found`);
 
-    return updatedAssignor;
+    return { assignor: updatedAssignor };
   }
 }
