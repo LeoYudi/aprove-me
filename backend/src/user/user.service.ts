@@ -13,7 +13,7 @@ export class UserService {
   }
 
   async findByLogin(login: string) {
-    return await this.userRepository.findOne(login);
+    return await this.userRepository.findByLogin(login);
   }
 
   async create(user: CreateUserArgsType) {
