@@ -1,18 +1,13 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class CreatePayableBody {
+export class CreateUserBody {
   @IsNotEmpty({
     message: 'Field `value` can not be empty',
   })
-  value: number;
+  login: string;
 
   @IsNotEmpty({
     message: 'Field `emissionDate` can not be empty',
   })
-  emissionDate: Date;
-
-  @IsNotEmpty({
-    message: 'Field `assignorId` can not be empty',
-  })
-  assignorId: string;
+  password: string;
 }

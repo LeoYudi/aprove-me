@@ -2,7 +2,7 @@ import { IsEmail, IsNotEmpty, MaxLength } from 'class-validator';
 
 export class CreateAssignorBody {
   @IsNotEmpty({
-    message: 'O campo `document` não pode ser vazio',
+    message: 'Field `document` can not be empty',
   })
   @MaxLength(30, {
     message: 'Field `document` must be shorter than 30 characters',
@@ -10,7 +10,7 @@ export class CreateAssignorBody {
   document: string;
 
   @IsNotEmpty({
-    message: 'O campo `email` não pode ser vazio',
+    message: 'Field `email` can not be empty',
   })
   @MaxLength(140, {
     message: 'Field `email` must be shorter than 140 characters',
@@ -21,7 +21,7 @@ export class CreateAssignorBody {
   email: string;
 
   @IsNotEmpty({
-    message: 'O campo `phone` não pode ser vazio',
+    message: 'Field `phone` can not be empty',
   })
   @MaxLength(20, {
     message: 'Field `phone` must be shorter than 20 characters',
@@ -29,7 +29,7 @@ export class CreateAssignorBody {
   phone: string;
 
   @IsNotEmpty({
-    message: 'O campo `name` não pode ser vazio',
+    message: 'Field `name` can not be empty',
   })
   @MaxLength(140, {
     message: 'Field `name` must be shorter than 140 characters',
