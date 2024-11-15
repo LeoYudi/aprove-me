@@ -2,22 +2,21 @@ import axios, { AxiosError } from 'axios';
 import { auth } from './auth';
 
 type ApiError = {
-  code?: number;
-  detail?: any;
-  status: number;
-  type: string;
-}[];
+  error: string;
+  message: string;
+  statusCode: number;
+};
 
 class CustomError extends Error {
-  errors: ApiError;
+  apiError: ApiError;
 
-  constructor(message: string, errors: ApiError) {
-    super(message);
-    this.errors = errors;
+  constructor(error: ApiError) {
+    super(error.message);
+    this.apiError = error;
   }
 }
 
-const api_url = process.env.REACT_APP_API_URL;
+const api_url = import.meta.env.VITE_API_URL;
 
 const api = axios.create({ baseURL: api_url });
 
@@ -31,31 +30,28 @@ api.interceptors.response.use(
   (response) => response,
   (error: AxiosError): CustomError => {
     if (error.code === 'ERR_NETWORK')
-      throw new CustomError('Erro de conexão', [
-        {
-          type: 'ERR_NETWORK',
-          status: 200,
-        },
-      ]);
+      throw new CustomError({
+        error: 'ERR_NETWORK',
+        message: 'Connection error',
+        statusCode: 200,
+      });
 
     if (error.code === 'ERR_CANCELED')
-      throw new CustomError('Requisição cancelada!', [
-        {
-          type: 'ERR_CANCELED',
-          status: 200,
-        },
-      ]);
+      throw new CustomError({
+        error: 'ERR_CANCELED',
+        message: 'Canceled',
+        statusCode: 200,
+      });
 
     if (error.response) {
-      throw new CustomError('', error.response.data as ApiError).errors;
+      throw new CustomError(error.response.data as ApiError);
     }
 
-    throw new CustomError('Erro!', [
-      {
-        type: 'ERR_UNKNOWN',
-        status: 200,
-      },
-    ]);
+    throw new CustomError({
+      error: 'ERR_UNKNOWN',
+      message: 'Something went wrong',
+      statusCode: 200,
+    });
   }
 );
 
