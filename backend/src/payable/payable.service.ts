@@ -7,6 +7,10 @@ import { PayableRepository } from 'src/repositories/payableRepository';
 export class PayableService {
   constructor(private payableRepository: PayableRepository) {}
 
+  async findAll(page: number, limit: number) {
+    return await this.payableRepository.findAll(page, limit);
+  }
+
   async findOne(id: string) {
     return await this.payableRepository.findOne(id);
   }

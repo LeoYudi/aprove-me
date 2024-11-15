@@ -11,6 +11,13 @@ import { Injectable } from '@nestjs/common';
 export class PrismaPayableRepository implements PayableRepository {
   constructor(private prisma: PrismaService) {}
 
+  async findAll(page: number, limit: number): Promise<PayableType[]> {
+    return await this.prisma.payable.findMany({
+      skip: (page - 1) * limit,
+      take: limit,
+    });
+  }
+
   async findOne(id: string): Promise<PayableType> {
     return await this.prisma.payable.findUnique({
       where: { id },

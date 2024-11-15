@@ -18,6 +18,8 @@ export type PayableType = {
 };
 
 export abstract class PayableRepository {
+  abstract findAll(page: number, limit: number): Promise<PayableType[]>;
+
   abstract findOne(id: string): Promise<PayableType>;
 
   abstract create(

@@ -7,11 +7,13 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { PayableService } from './payable.service';
 import { CreatePayableBody } from 'src/dtos/createPayableBody';
 import { UpdatePayableBody } from 'src/dtos/updatePayableBody';
 import { AssignorService } from 'src/assignor/assignor.service';
+import { ListPayableQuery } from 'src/dtos/listPayableQuery';
 
 @Controller('integration/payable')
 export class PayableController {
@@ -19,6 +21,12 @@ export class PayableController {
     private payableServive: PayableService,
     private assignorService: AssignorService,
   ) {}
+
+  @Get('')
+  async findAll(@Query() query: ListPayableQuery) {
+    const { page, limit } = query;
+    return await this.payableServive.findAll(+page, +limit);
+  }
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
