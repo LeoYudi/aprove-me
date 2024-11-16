@@ -21,7 +21,8 @@ const api_url = import.meta.env.VITE_API_URL;
 const api = axios.create({ baseURL: api_url });
 
 api.interceptors.request.use((config) => {
-  if (!config.headers.Authorization) config.headers.Authorization = auth.token;
+  if (!config.headers.Authorization)
+    config.headers.Authorization = `Bearer ${auth.token}`;
 
   return config;
 });
